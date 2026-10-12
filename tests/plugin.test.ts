@@ -4,6 +4,7 @@ import BasesReadOnlyPlugin from '../src/main';
 import { normalizeSettings, removeLocked, renameLocked, shouldBlock } from '../src/policy';
 import { attemptOf, propertyOf } from '../src/guard';
 import { bindPro, isPro, onProChange, resetPro, SPONSORS } from '../src/pro';
+import { BasesReadOnlySettingTab } from '../src/settings';
 import manifest from '../manifest.json';
 
 afterEach(() => { resetPro(); document.body.empty(); });
@@ -132,5 +133,38 @@ describe('review fixes', () => {
 	it('keeps the same settings object after an unrelated rename', () => {
 		expect(renameLocked(locked, 'Notes/Atlas.md', 'Notes/Atlas 2.md')).toBe(locked);
 		expect(renameLocked(locked, 'Archive', 'Old').locked).toEqual(['Projects.base', 'Old/Old.base', 'Old/Deep/Older.base', 'Archived.base']);
+	});
+});
+
+describe('audit fixes', () => {
+	type Internals = { capture(e: Event): void; markEmbed(el: HTMLElement, source: string): void; watch(doc: Document): void; docs: Map<Document, MutationObserver> };
+	it('keeps the lock on a base embed in a hover preview outside a workspace leaf', () => {
+		const p = plugin(); p.settings.locked = ['Projects.base']; const internals = p as unknown as Internals;
+		const popover = document.body.createDiv({ cls: 'popover hover-popover' });
+		const embed = popover.createSpan({ cls: 'internal-embed bases-embed', attr: { src: 'Projects.base' } });
+		const cell = embed.createDiv({ cls: 'bases-view' }).createDiv({ cls: 'bases-td' });
+		internals.markEmbed(embed, 'Atlas.md');
+		p.refresh();
+		expect(embed.classList.contains('brl-locked')).toBe(true);
+		const capture = (e: Event) => internals.capture.call(p, e);
+		document.addEventListener('dblclick', capture, true);
+		try { const e = new MouseEvent('dblclick', { bubbles: true, cancelable: true }); cell.dispatchEvent(e); expect(e.defaultPrevented).toBe(true); }
+		finally { document.removeEventListener('dblclick', capture, true); p.onunload(); }
+	});
+	it('keeps a comma inside one lock rule line', async () => {
+		bindPro({ isPro: () => true, onChange: () => () => undefined } as never);
+		const p = plugin(); vi.spyOn(p, 'saveData').mockResolvedValue();
+		const tab = new BasesReadOnlySettingTab(p.app, p);
+		await tab.setControlValue('rulesText', 'Clients, old/**.base\nArchive');
+		expect(p.settings.rules).toEqual(['Clients, old/**.base', 'Archive']);
+	});
+	it('drops the observer of a closed pop-out window document', () => {
+		const p = plugin(); const internals = p as unknown as Internals;
+		const closed = document.implementation.createHTMLDocument('closed');
+		internals.watch(closed);
+		expect(internals.docs.has(closed)).toBe(true);
+		p.refresh();
+		expect(internals.docs.has(closed)).toBe(false);
+		p.onunload();
 	});
 });

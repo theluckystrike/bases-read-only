@@ -76,7 +76,7 @@ It reduces accidental changes through supported Bases controls. It does not stop
 
 ### What was not tested?
 
-Real iOS and Android touch interactions, third-party kanban layouts, custom themes, pop-out windows, screen readers, large vaults and sync between devices were not tested. App tests ran on macOS with a local sponsor reply. Linux CI, live GitHub sign-in, payments, input method editors and mouse wheel steps in a focused number cell were not checked. Native Kanban needs Obsidian 1.14 or later. A third-party kanban view can use different DOM classes. Bases classes are not a documented API; an Obsidian update can require selector changes.
+Real iOS and Android touch interactions, third-party kanban layouts, custom themes, pop-out windows, hover previews, screen readers, large vaults and sync between devices were not tested. App tests ran on macOS with a local sponsor reply. Linux CI, live GitHub sign-in, payments, input method editors and mouse wheel steps in a focused number cell were not checked. Native Kanban needs Obsidian 1.14 or later. A third-party kanban view can use different DOM classes. Bases classes are not a documented API; an Obsidian update can require selector changes.
 
 ## Payment, account and network
 

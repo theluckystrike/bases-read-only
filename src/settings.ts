@@ -22,7 +22,7 @@ export class BasesReadOnlySettingTab extends PluginSettingTab {
 	async setControlValue(key: string, value: unknown): Promise<void> {
 		if (['rulesText', 'editableText', 'kiosk'].includes(key)) {
 			if (!isPro()) return;
-			if (key === 'rulesText') this.plugin.settings = { ...this.plugin.settings, rules: String(value).split(/[\n,]/).map((s) => s.trim()).filter(Boolean) };
+			if (key === 'rulesText') this.plugin.settings = { ...this.plugin.settings, rules: String(value).split('\n').map((s) => s.trim()).filter(Boolean) };
 			else if (key === 'editableText') this.plugin.settings = { ...this.plugin.settings, editable: String(value).split(/[,\n]/).map((s) => s.trim()).filter(Boolean) };
 			else this.plugin.settings = { ...this.plugin.settings, kiosk: value === true };
 			await this.plugin.saveAndRefresh();

@@ -109,7 +109,14 @@ export default class BasesReadOnlyPlugin extends Plugin {
 			if (leaf.view.getViewType() === 'bases' && file?.extension === 'base') { this.mark(el, file.path); seen.add(el); }
 			for (const embed of Array.from(el.querySelectorAll<HTMLElement>(DOM.embed))) { this.markEmbed(embed, file?.path ?? ''); seen.add(embed); }
 		});
-		for (const doc of this.docs.keys()) {
+		for (const [doc, observer] of this.docs) {
+			// A closed pop-out window has no view. Drop its observer so the document can be freed.
+			if (!doc.defaultView) { observer.disconnect(); this.docs.delete(doc); this.popupPaths.delete(doc); continue; }
+			// A hover preview is outside each leaf. Keep the source path that the post processor gave its embeds.
+			for (const embed of Array.from(doc.querySelectorAll<HTMLElement>(DOM.embed))) {
+				const path = embed.getAttribute(PATH_ATTR);
+				if (path && !seen.has(embed)) { this.mark(embed, path); seen.add(embed); }
+			}
 			const popups = Array.from(doc.querySelectorAll<HTMLElement>(DOM.popup));
 			const path = this.popupPaths.get(doc) ?? this.activeBase()?.path;
 			if (path) for (const popup of popups) { this.mark(popup, path); seen.add(popup); }
