@@ -1,6 +1,6 @@
 {
 	"name": "bases-read-only",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"private": true,
 	"description": "Lock chosen bases to block clicks, keys and drags that change cells, cards or view settings.",
 	"main": "main.js",
