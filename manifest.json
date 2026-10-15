@@ -1,7 +1,7 @@
 {
 	"id": "bases-read-only",
 	"name": "Bases Read Only",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"minAppVersion": "1.13.4",
 	"description": "Lock chosen bases to block clicks, keys and drags that change cells, cards or view settings.",
 	"author": "Michael Lip",

@@ -56,7 +56,9 @@ Run "Lock all bases in kiosk mode" to enable a vault-wide base lock. This covers
 
 ## Install
 
-The build needs Obsidian 1.13.4 or later and the core Bases plugin. For a manual install, place `main.js`, `manifest.json` and `styles.css` in `<vault>/.obsidian/plugins/bases-read-only/`. Open Community plugins and enable Bases Read Only. This build has not been submitted to the community directory.
+The build needs Obsidian 1.13.4 or later and the core Bases plugin. In Settings, open Community plugins, select Browse, and search for Bases Read Only. Install the plugin and enable it. It is listed in the [community directory](https://community.obsidian.md/plugins/bases-read-only).
+
+For a manual install, place `main.js`, `manifest.json` and `styles.css` from a [release](https://github.com/theluckystrike/bases-read-only/releases) in `<vault>/.obsidian/plugins/bases-read-only/`. Open Community plugins and enable Bases Read Only.
 
 ## Usage
 
