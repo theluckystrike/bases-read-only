@@ -2,10 +2,16 @@ import { PluginSettingTab, type SettingDefinitionItem } from 'obsidian';
 import { sponsorsSettingItems } from './license/github-obsidian';
 import { PRO_UI, isPro } from './pro';
 import type BasesReadOnlyPlugin from './main';
+import { helloSettingItems } from './hello/settings';
 
 export class BasesReadOnlySettingTab extends PluginSettingTab {
 	constructor(app: ConstructorParameters<typeof PluginSettingTab>[0], public plugin: BasesReadOnlyPlugin) { super(app, plugin); }
 	getSettingDefinitions(): SettingDefinitionItem[] {
+		// The product rows, then the "More from NoteMods" card (packages/hello).
+		return [...this.productSettingDefinitions(), ...helloSettingItems()];
+	}
+
+	productSettingDefinitions(): SettingDefinitionItem[] {
 		return [
 			{ name: 'Locked bases', desc: this.plugin.settings.locked.length ? this.plugin.settings.locked.join(', ') : 'No manual locks. Use the command or a base file menu to add a lock.' },
 			{ name: 'Lock rules (Pro)', desc: 'One folder or glob per line. Example: Archive/**.base. Rules apply while Pro is on.', control: { type: 'textarea', key: 'rulesText', rows: 3, defaultValue: '', placeholder: 'Archive/**.base', disabled: !isPro() } },

@@ -6,6 +6,8 @@ import { isLocked, normalizeSettings, removeLocked, renameLocked, shouldBlock, t
 import { attemptOf } from './guard';
 import { DOM, LOCK_CLASS, PATH_ATTR } from './selectors';
 import { BasesReadOnlySettingTab } from './settings';
+import { setupHello } from './hello/index';
+import WHATS_NEW from './whats-new.json';
 
 const EVENTS = ['mousedown', 'click', 'dblclick', 'keydown', 'beforeinput', 'paste', 'cut', 'dragstart', 'drop', 'pointerdown', 'contextmenu', 'touchstart'] as const;
 const PRO_TICK_MS = 6 * 60 * 60 * 1000;
@@ -23,6 +25,8 @@ export default class BasesReadOnlyPlugin extends Plugin {
 	private saves: Promise<void> = Promise.resolve();
 
 	async onload(): Promise<void> {
+		// First: "What's new" reads its state before the settings load (packages/hello). It does not wait.
+		setupHello(this, WHATS_NEW);
 		await this.loadSettings();
 		const pro = createGitHubSponsors(this.app, this.manifest.id, SPONSORS, this);
 		pro.init();

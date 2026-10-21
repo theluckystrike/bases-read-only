@@ -68,6 +68,8 @@ Remove the manual lock before you edit the base. If it stays locked, check the P
 
 ## Settings
 
+After a minor or major update, this plugin opens one What's new tab in the background. The tab and settings card suggest other NoteMods plugins and Zovo Chat and link to notemods.com for feedback ([privacy](https://notemods.com/privacy/)). The tab sends no data. Turn the tab off in Settings.
+
 The plugin options show the manual lock paths, Pro rules, editable property names, kiosk mode and the GitHub Sponsors controls. Rules and exceptions stay saved when Pro turns off, but the free guard ignores them. Manual locks continue to work. Locks are per vault and depend on the saved plugin data of this device.
 
 ## FAQ
