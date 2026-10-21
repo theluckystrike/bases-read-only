@@ -95,3 +95,7 @@ After a successful check, Pro can work offline for up to 14 days. Sign out or a 
 ## Support
 
 This source is prepared for theluckystrike at notemods.com. Give the maintainer your Obsidian version, the affected layout, and a small sample base when you report a problem. Remove private note text from the sample. Include whether the base was manually locked or matched a Pro rule. The plugin has no telemetry and does not submit a bug report for you.
+
+## Community
+
+Questions, bugs or plugin ideas? Talk to me and other Obsidian users in [Zovo Chat](https://t.me/+k2MM-BIc7SQ5OWM0) on Telegram. It has a topic for these plugins. You can also open an issue here.
