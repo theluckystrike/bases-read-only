@@ -1,5 +1,11 @@
 # bases-read-only
 
+## 1.1.1
+
+### Patch Changes
+
+- The Bases Read Only notice for a Pro feature now has a Sponsor on GitHub button.
+
 ## 1.1.0
 
 ### Minor Changes

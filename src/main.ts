@@ -1,7 +1,7 @@
 import { FileView, Notice, Platform, Plugin, TFile, getLinkpath } from 'obsidian';
 import type { SponsorsManager } from './license/index';
 import { createGitHubSponsors } from './license/github-obsidian';
-import { SPONSORS, bindPro, isPro, onProChange, resetPro } from './pro';
+import { SPONSORS, bindPro, isPro, onProChange, resetPro, proNotice } from './pro';
 import { isLocked, normalizeSettings, removeLocked, renameLocked, shouldBlock, toggleLocked, type LockSettings } from './policy';
 import { attemptOf } from './guard';
 import { DOM, LOCK_CLASS, PATH_ATTR } from './selectors';
@@ -93,7 +93,7 @@ export default class BasesReadOnlyPlugin extends Plugin {
 		new Notice(this.locked(path) ? `Locked ${path}. A rule or kiosk mode can keep a base locked.` : `Unlocked ${path}.`);
 	}
 	async setKiosk(on: boolean): Promise<void> {
-		if (on && !isPro()) { new Notice('Kiosk mode needs pro. Sign in with GitHub in the plugin options.'); return; }
+		if (on && !isPro()) { proNotice('Kiosk mode needs pro.'); return; }
 		this.settings = { ...this.settings, kiosk: on };
 		await this.saveAndRefresh();
 		new Notice(on ? 'Kiosk mode on.' : 'Kiosk mode off. Manual locks stay set.');

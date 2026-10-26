@@ -1,7 +1,6 @@
 {
 	"name": "bases-read-only",
-	"repository": {"type": "git", "url": "theluckystrike/bases-read-only.git"},
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"private": true,
 	"description": "Lock chosen bases to block clicks, keys and drags that change cells, cards or view settings.",
 	"main": "main.js",
