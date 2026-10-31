@@ -6,6 +6,13 @@ The plugin guards Bases controls in the Obsidian interface. It does not set file
 
 <img src="https://raw.githubusercontent.com/theluckystrike/bases-read-only/HEAD/docs/lock-demo.gif" alt="A sample project table changes from unlocked to locked, then shows two separate embeds" width="720">
 
+## Quick start
+
+1. Open a `.base` file that shows a table with a checkbox or text property.
+2. Run the command "Toggle lock for current base". On desktop, the status bar shows "Base locked".
+3. Double-click a text cell, or click a checkbox. The value does not change.
+4. Run "Toggle lock for current base" again to remove the lock.
+
 ## Features
 
 ### A lock for each base file
@@ -86,7 +93,7 @@ Real iOS and Android touch interactions, third-party kanban layouts, custom them
 
 The core features are free. Pro features need a GitHub Sponsors sponsorship of theluckystrike: $5 a month or more, or $15 once. A total payment of $15 meets the payment requirement for Pro without further payment. Sign-in and the checks below still apply. Your notes stay readable and editable with or without Pro.
 
-GitHub handles the payment. Sponsor at https://github.com/sponsors/theluckystrike. You need no account for the free features. Pro needs the GitHub account that sponsors.
+GitHub handles the payment. Sponsor at https://github.com/sponsors/theluckystrike?frequency=one-time&metadata_source=bases-read-only. You need no account for the free features. Pro needs the GitHub account that sponsors.
 
 Until you select "Sign in with GitHub" in the settings, Bases Read Only makes no network requests. Sign in uses the GitHub device flow. Bases Read Only sends its public client ID and the scope `read:user` to `https://github.com/login/device/code` and shows you a code. While you enter the code at https://github.com/login/device, it asks `https://github.com/login/oauth/access_token` every few seconds to check the sign-in status. The scope permits profile reads only. GitHub needs this access to show the sponsorship tier. It grants no repository scope and no write access.
 
