@@ -105,7 +105,7 @@ export default class BasesReadOnlyPlugin extends Plugin {
 	refresh(): void {
 		if (this.stopped) return;
 		const seen = new Set<HTMLElement>();
-		this.watch(document);
+		this.watch(this.app.workspace.containerEl.doc);
 		this.app.workspace.iterateAllLeaves((leaf) => {
 			const el = leaf.view.containerEl;
 			this.watch(el.ownerDocument);
